@@ -314,12 +314,11 @@ class Client:
             print(f">> Recieved data from server: {self.recv_data.decode('utf-8')} size: {len(self.recv_data.decode('utf-8'))}")
 
             # Ошибка
-            if int(self.recv_data.decode("utf-8")) == response_flags["ERROR"]:
+            if len(self.data_tokens) == 1 and int(self.recv_data.decode("utf-8")) == response_flags["ERROR"]:
                 print(">> Неизвестная ошибка")
                 return
-            elif int(self.recv_data.decode("utf-8")) == response_flags["OK"]:
+            elif len(self.data_tokens) == 1 and int(self.recv_data.decode("utf-8")) == response_flags["OK"]:
                 print(">> Активация прошла успешно")
-
 
                 confirm_code_scene.run = False
 
